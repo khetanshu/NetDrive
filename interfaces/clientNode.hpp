@@ -13,8 +13,8 @@
 using namespace::std;
 
 class Client{
-//    splitFile(string filename);
-//    mergeFile(string filename);
+    void splitFile(string filename, vector<int>& chunk_sizes); // splits the file to given chunk sizes
+//    void mergeFile(string filename);
     
 public:
     bool storeFile(string filename);
