@@ -10,8 +10,8 @@
 #include "iostream"
 #include "unordered_map"
 #include "vector"
-#include "communication.hpp"
-#include "types.hpp"
+#include "Communication.hpp"
+#include "Types.hpp"
 
 using namespace std;
 

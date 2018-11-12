@@ -13,8 +13,8 @@
 #include "fstream"
 #include "string"
 #include "vector"
-#include "communication.hpp"
-#include "types.hpp"
+#include "Communication.hpp"
+#include "Types.hpp"
 
 using namespace::std;
 

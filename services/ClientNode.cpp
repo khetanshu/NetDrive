@@ -4,7 +4,7 @@
 //
 //
 
-#include "clientNode.hpp"
+#include "ClientNode.hpp"
 
 
 vector<chunk> ClientNode::splitFile(string fileName, vector<chunk>& chunks)

@@ -10,7 +10,7 @@
 #include <iostream>
 #include <unistd.h>
 #include "types.hpp"
-#include "communication.hpp"
+#include "Communication.hpp"
 #include "unordered_map"
 
 using namespace std;

@@ -3,7 +3,7 @@
 //  NetDrive
 //
 
-#include "storageNode.hpp"
+#include "StorageNode.hpp"
 
 
 string StorageNode::getChunkPath(int chunkID){
