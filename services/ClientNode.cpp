@@ -5,12 +5,6 @@
 //
 
 #include "clientNode.hpp"
-#include "stdexcept"
-#include "fstream"
-#include "string"
-#include "vector"
-
-
 
 
 void ClientNode::splitFile(string fileName, vector<int>& sizes)
@@ -23,7 +17,6 @@ void ClientNode::splitFile(string fileName, vector<int>& sizes)
     try
     {
         ifstream i_file(fileName);
-        
         while (!i_file.eof())
         {
             getline(i_file, line);

@@ -9,6 +9,10 @@
 
 #include "iostream"
 #include "vector"
+#include "stdexcept"
+#include "fstream"
+#include "string"
+#include "vector"
 #include "types.hpp"
 
 using namespace::std;
