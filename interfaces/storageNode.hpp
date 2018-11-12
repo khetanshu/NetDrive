@@ -10,11 +10,12 @@
 #include <iostream>
 #include <unistd.h>
 #include "types.hpp"
+#include "communication.hpp"
 #include "unordered_map"
 
 using namespace std;
 
-class StorageNode {
+class StorageNode : Communication{
     unordered_map<int,string> chunkIndex; //Keeps track of chunk ID and its filepath
     
 private:

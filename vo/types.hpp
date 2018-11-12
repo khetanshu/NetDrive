@@ -15,5 +15,13 @@ typedef struct chunk{
     int chunkID;
 } chunk;
 
+typedef struct packet{
+    //TODO
+    
+    
+    
+}packet;
+
+
 
 #endif /* Types_h */

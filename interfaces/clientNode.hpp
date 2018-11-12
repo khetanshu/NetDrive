@@ -13,19 +13,24 @@
 #include "fstream"
 #include "string"
 #include "vector"
+#include "communication.hpp"
 #include "types.hpp"
 
 using namespace::std;
 
-class ClientNode{
+class ClientNode : Communication{
     //TO:DO device information to be added later during integration
-
+    vector<chunk> chunks;
+    
+    
 private:
    
-    void splitFile(string filename, vector<int>& chunk_sizes); // splits the file to given chunk sizes
+    vector<chunk> splitFile(string fileName, vector<chunk>& chunks); // splits the file to given chunk sizes
     //    bool mergeFile(string filename);
     
     bool transferFileToCloud(vector<chunk>& chunks);
+
+    
     bool transferChunkToStorageNode(chunk chunk);
     
     

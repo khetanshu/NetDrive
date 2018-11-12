@@ -10,11 +10,12 @@
 #include "iostream"
 #include "unordered_map"
 #include "vector"
+#include "communication.hpp"
 #include "types.hpp"
 
 using namespace std;
 
-class RoutingNode {
+class RoutingNode : Communication{
     //Data structures
     int totalStorageNodes; //Keeps track of total storage nodes
     long totalRemainingStorageCapacity; //Keeps track of total remaining storage capacity in the system {as a whole}
