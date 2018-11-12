@@ -19,6 +19,7 @@ int main(int argc, const char * argv[]) {
     int status = storageNode.sendChunk(filename, storageNodePath);
     cout<< "Transfer status : "<< (status==0?"success":"failed") <<endl;
     //TODO
+    //test
     
     return 0;
 }
