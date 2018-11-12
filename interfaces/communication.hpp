@@ -1,5 +1,5 @@
 //
-//  Communication.hpp
+//  communication.hpp
 //  NetDrive
 //
 //
@@ -17,7 +17,7 @@ private:
 public:
     
     
-}
+};
 
 
 #endif /* Communication_hpp */
