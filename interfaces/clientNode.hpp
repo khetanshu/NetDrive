@@ -8,13 +8,22 @@
 #define ClientNode_hpp
 
 #include "iostream"
+#include "vector"
 #include "types.hpp"
 
 using namespace::std;
 
-class Client{
-//    splitFile(string filename);
-//    mergeFile(string filename);
+class ClientNode{
+    //TO:DO device information to be added later during integration
+
+private:
+   
+//    bool splitFile(string filename);
+//    bool mergeFile(string filename);
+    
+    bool transferFileToCloud(vector<chunk> chunks);
+    bool transferChunkToStorageNode(chunk chunk);
+    
     
 public:
     bool storeFile(string filename);
