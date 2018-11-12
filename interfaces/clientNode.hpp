@@ -18,7 +18,9 @@ class ClientNode{
 
 private:
    
-    void splitFile(string filename, vector<int>& chunk_sizes); // splits the file to given chunk sizes//    bool mergeFile(string filename);
+    void splitFile(string filename, vector<int>& chunk_sizes); // splits the file to given chunk sizes
+    
+    //    bool mergeFile(string filename);
     
     bool transferFileToCloud(vector<chunk>& chunks);
     bool transferChunkToStorageNode(chunk chunk);
