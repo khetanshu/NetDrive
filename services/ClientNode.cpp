@@ -5,3 +5,9 @@
 //
 
 #include "clientNode.hpp"
+#include "stdexcept"
+#include "fstream"
+#include "string"
+#include "vector"
+
+
