@@ -10,10 +10,15 @@
 #include <iostream>
 #include <unistd.h>
 #include "types.hpp"
+#include "unordered_map"
 
 using namespace std;
 
 class StorageNode {
+    unordered_map<int,string> chunkIndex; //Keeps track of chunk ID and its filepath
+    
+private:
+    string getChunkPath(int chunkID);
     
 public:
     int sendChunk(string chunkFilename, string storageNodePath);
