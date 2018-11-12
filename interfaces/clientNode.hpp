@@ -18,10 +18,9 @@ class ClientNode{
 
 private:
    
-//    bool splitFile(string filename);
-//    bool mergeFile(string filename);
+    void splitFile(string filename, vector<int>& chunk_sizes); // splits the file to given chunk sizes//    bool mergeFile(string filename);
     
-    bool transferFileToCloud(vector<chunk> chunks);
+    bool transferFileToCloud(vector<chunk>& chunks);
     bool transferChunkToStorageNode(chunk chunk);
     
     
@@ -30,6 +29,5 @@ public:
     bool retriveFile(string filename);
     
 };
-
 
 #endif /* ClientNode_hpp */

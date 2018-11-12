@@ -10,7 +10,7 @@
 
 
 
-bool ClientNode::transferFileToCloud(vector<chunk> chunks){
+bool ClientNode::transferFileToCloud(vector<chunk>& chunks){
     //TODO
      return true;
 }
