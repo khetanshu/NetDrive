@@ -13,7 +13,7 @@ void ServiceTester::_unit_test_RoutingNode(){
     RoutingNode routingNode;
     _unit_test_fileStoreAndPrint(routingNode, "file1", 10);
     _unit_test_fileStoreAndPrint(routingNode, "file2", 4);
-    _unit_test_fileStoreAndPrint(routingNode, "file3", 9);
+    _unit_test_fileStoreAndPrint(routingNode, "file3", 7);
     _unit_test_fileStoreAndPrint(routingNode, "file4", 4);
     
     cout<<endl;
