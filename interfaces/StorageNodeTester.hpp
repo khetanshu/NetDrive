@@ -19,6 +19,6 @@ protected:
     
     
     
-}
+};
 
 #endif /* StorageNodeTester_hpp */

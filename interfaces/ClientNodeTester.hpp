@@ -21,7 +21,7 @@ protected:
     
     
     
-}
+};
 
 
 #endif /* ClientNodeTester_hpp */
