@@ -15,12 +15,7 @@
 using namespace std;
 
 class ServiceTester : RoutingNodeTester, ClientNodeTester,StorageNodeTester {
-private:
-//    //Used for Routing Module
-//    void fileStoreAndPrint(RoutingNode& routingNode, string filename, int fileSize);
-//    void printChunks(chunk& ck);
-//    void printRemainingNodeCapacities(RoutingNode routingNode);
-//    void fileSearchAndPrint(RoutingNode& routingNode, string filename);
+
 public:
     //For Routing module
     void _unit_test_RoutingNode();
