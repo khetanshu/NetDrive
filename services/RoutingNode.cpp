@@ -16,11 +16,13 @@ RoutingNode::RoutingNode(){
 }
 
 void RoutingNode::registerDevices(){
+    cout<<"**** Device Registration ****"<<endl;
     int defaultCapacity=5; //TODO to be made more generic
     for (int i=0; i<totalStorageNodes; i++) {
-        nodeCapacityIndex[i]= defaultCapacity+(i%totalStorageNodes)+1;//defaultCapacity; //In GB
+        int capacity =defaultCapacity+(i%totalStorageNodes)+1;
+        nodeCapacityIndex[i]= capacity;//defaultCapacity; //In MB/GB as per the assumption , TODO :: TBD
         cout<<"Node["<<i<<"] default capacity:"<<nodeCapacityIndex[i]<<endl;
-        totalRemainingStorageCapacity += defaultCapacity;
+        totalRemainingStorageCapacity += capacity;
     }
     cout<<endl;
 }
@@ -95,8 +97,19 @@ bool RoutingNode::deleteFile(string filename){
 }
 
 
+//getters
+
+unordered_map<int,long> RoutingNode::getRemainingNodesCapacities(){
+    return nodeCapacityIndex;
+}
+
+int RoutingNode::getTotalStorageNodes(){
+    return totalStorageNodes;
+}
 
 
-
+long RoutingNode::getTotalRemainingStorageCapacity(){
+    return totalRemainingStorageCapacity;
+}
 
 

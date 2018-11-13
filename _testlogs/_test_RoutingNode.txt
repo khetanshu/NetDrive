@@ -1,0 +1,57 @@
+**** Device Registration ****
+Node[0] default capacity:6
+Node[1] default capacity:7
+Node[2] default capacity:8
+
+***** Testing for STORE_FILE() *****
+
+--> Remaining Node's Capacities : { 6 7 8 } = Total:21
+
+Chunks for file1 of size = 10
+<S_Node:0, size :4, seqID:0, chunkID:1>
+<S_Node:1, size :3, seqID:1, chunkID:2>
+<S_Node:2, size :3, seqID:2, chunkID:3>
+
+--> Remaining Node's Capacities : { 2 4 5 } = Total:11
+
+Chunks for file2 of size = 4
+<S_Node:0, size :2, seqID:0, chunkID:4>
+<S_Node:1, size :1, seqID:1, chunkID:5>
+<S_Node:2, size :1, seqID:2, chunkID:6>
+
+--> Remaining Node's Capacities : { 0 3 4 } = Total:7
+
+Chunks for file3 of size = 7
+<S_Node:1, size :3, seqID:1, chunkID:7>
+<S_Node:2, size :4, seqID:2, chunkID:8>
+
+--> Remaining Node's Capacities : { 0 0 0 } = Total:0
+
+Chunks for file4 of size = 4
+File cannot be stored!
+--> Remaining Node's Capacities : { 0 0 0 } = Total:0
+
+***** Testing for RETRIEVE_FILE() *****
+
+Searching for :file1
+<S_Node:0, size :4, seqID:0, chunkID:1>
+<S_Node:1, size :3, seqID:1, chunkID:2>
+<S_Node:2, size :3, seqID:2, chunkID:3>
+
+Searching for :file2
+<S_Node:0, size :2, seqID:0, chunkID:4>
+<S_Node:1, size :1, seqID:1, chunkID:5>
+<S_Node:2, size :1, seqID:2, chunkID:6>
+
+Searching for :file3
+<S_Node:1, size :3, seqID:1, chunkID:7>
+<S_Node:2, size :4, seqID:2, chunkID:8>
+
+Searching for :file4
+File not found!
+
+Searching for :file5
+File not found!
+
+
+Program ended with exit code: 0

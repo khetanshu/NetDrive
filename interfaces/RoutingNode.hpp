@@ -44,7 +44,14 @@ public:
     
     //Returns the chunks information of the input file
     vector<chunk> retrieveFile (string filename);
+    //
     bool deleteFile(string filename);
+    
+    
+    //getters
+    unordered_map<int,long> getRemainingNodesCapacities();
+    int getTotalStorageNodes();
+    long getTotalRemainingStorageCapacity();
 };
 
 
