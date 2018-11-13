@@ -10,7 +10,7 @@
 //Types definations
 typedef struct chunk{
     int storageNode;
-    int size;
+    long size;
     int sequenceID;
     int chunkID;
 } chunk;
