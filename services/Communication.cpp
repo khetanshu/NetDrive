@@ -74,14 +74,14 @@ void Communication::server(int port) {
     				
     				// I doubt there will be > 256 storage nodes
     				// in the near future. so we'll just take 1 char
-    				chunk[i].storageNode = (int) buffer[p++];
+    				chunks[i].storageNode = (int) *(p++);
 
     				// serialize int from byte array.
-    				chunk[i].chunkID = 
-    					(buffer[p] << 24) 
-    					| (buffer[p+1] << 16)
-    					| (buffer[p+2] << 8)
-    					| (buffer[p] << 0);
+    				chunks[i].chunkID = 
+    					(*p << 24) 
+    					| (*(p+1) << 16)
+    					| (*(p+2) << 8)
+    					| (*(p+3) << 0);
 
     				p+=4;
     					
