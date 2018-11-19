@@ -22,7 +22,7 @@ class RoutingNode : Communication{
     long totalRemainingStorageCapacity; //Keeps track of total remaining storage capacity in the system {as a whole}
     unordered_map<int,long> nodeCapacityIndex; //Keeps track of the the remaining storage capacity of each storage node
     int lastestChunkID; //Keeps track of the latest ID assigned to the file's chunks. This is a unique ID assigned to each chunks in the system
-    unordered_map<string,vector<chunk>> fileIndex;//Keeps the chunks information of each files within the system
+    unordered_map<string, vector<chunk> > fileIndex;//Keeps the chunks information of each files within the system
     long minStorageCapacity;
     
     

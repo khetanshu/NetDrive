@@ -6,4 +6,7 @@
 
 #include "Communication.hpp"
 
+Communication::Communication() {
 
+	return;
+}
