@@ -15,7 +15,7 @@
 
 using namespace std;
 
-class RoutingNode : Communication{
+class RoutingNode : public Communication{
     //Data structures
     int totalStorageNodes; //Keeps track of total storage nodes
     int totalStorageNodesNotEmpty;//keeps track of number of storage nodes having storage capacity > 0

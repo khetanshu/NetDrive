@@ -7,22 +7,28 @@
 #ifndef Communication_hpp
 #define Communication_hpp
 
-#include <stdio.h>
+#include <unistd.h> 
+#include <iostream> 
+#include <sys/socket.h> 
+#include <stdlib.h> 
+#include <netinet/in.h> 
+#include <string.h>
+#include <arpa/inet.h>
+
 #include "Types.hpp"
 
 class Communication{
 
 private:
-	packet p;
 
 protected:
-    void send();
-    void receive();
-    void parse();
+	packet p;
     
 public:
     Communication();
-    void init();
+    void server(int port);
+    void client(int port, char const *ip);
+    void parse(char *buffer, int buffer_len);
 };
 
 

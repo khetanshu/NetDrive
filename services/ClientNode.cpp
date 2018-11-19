@@ -34,22 +34,22 @@ vector<chunk> ClientNode::splitFile(string fileName, vector<chunk>& chunks)
     }
     
     
-    //  splitting file into chunks
-    for(auto &size: sizes)
-    {
-        try
-        {
-            ofstream o_file(fileName+"-"+to_string(i++));
-            o_file << buffer.substr(peek, size);
-            o_file.close();
-            peek+=size;
-            cout << endl;
-        }
-        catch (exception const& e)
-        {
-            cerr << "Error ocurred while writing file!\n" << e.what() << endl;
-        }
-    }
+    // //  splitting file into chunks
+    // for(auto &size: sizes)
+    // {
+    //     try
+    //     {
+    //         ofstream o_file(fileName+"-"+to_string(i++));
+    //         o_file << buffer.substr(peek, size);
+    //         o_file.close();
+    //         peek+=size;
+    //         cout << endl;
+    //     }
+    //     catch (exception const& e)
+    //     {
+    //         cerr << "Error ocurred while writing file!\n" << e.what() << endl;
+    //     }
+    // }
     //TODO
     return chunks;
     
