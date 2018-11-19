@@ -97,6 +97,10 @@ bool RoutingNode::deleteFile(string filename){
 }
 
 
+void RoutingNode::listener() {
+    
+}
+
 //getters
 
 unordered_map<int,long> RoutingNode::getRemainingNodesCapacities(){

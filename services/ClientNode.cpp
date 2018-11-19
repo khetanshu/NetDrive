@@ -76,3 +76,8 @@ bool ClientNode::transferChunkToStorageNode(chunk chunk){
     
     return true;
 }
+
+
+void ClientNode::listener() {
+    
+}

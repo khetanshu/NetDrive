@@ -52,6 +52,8 @@ public:
     unordered_map<int,long> getRemainingNodesCapacities();
     int getTotalStorageNodes();
     long getTotalRemainingStorageCapacity();
+    
+    void listener() override;
 };
 
 

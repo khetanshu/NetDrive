@@ -15,3 +15,7 @@ int StorageNode::sendChunk(string chunkName, string storageNodePath){
     return system(command.c_str());
 }
 
+
+void StorageNode::listener() {
+    
+}
