@@ -25,7 +25,7 @@ class ClientNode : Communication{
     
 private:
    
-    vector<chunk> splitFile(string fileName, vector<chunk>& chunks); // splits the file to given chunk sizes
+    void splitFile(string fileName, vector<chunk>& chunks); // splits the file to given chunk sizes
     //    bool mergeFile(string filename);
     
     bool transferFileToCloud(vector<chunk>& chunks);
