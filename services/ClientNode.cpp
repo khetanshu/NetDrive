@@ -10,7 +10,7 @@
 vector<chunk> ClientNode::splitFile(string fileName, vector<chunk>& chunks)
 {
     
-    vector<int> sizes ;//TODOD
+    vector<chunk> ck;//TODOD
     
     int peek = 0, i = 0;
     string line;
