@@ -4,7 +4,7 @@
 //
 
 #include <iostream>
-#include "interfaces/ServiceTester.hpp"
+#include "ServiceTester.hpp"
 
 using namespace std;
 

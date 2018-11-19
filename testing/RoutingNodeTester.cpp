@@ -47,3 +47,11 @@ void RoutingNodeTester::fileSearchAndPrint(RoutingNode& routingNode, string file
     cout<<endl;
     
 }
+
+int main() {
+
+    RoutingNode node;
+    node.server(8080);
+
+    return 0;
+}

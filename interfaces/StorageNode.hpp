@@ -24,6 +24,8 @@ private:
 public:
     int sendChunk(string chunkFilename, string storageNodePath);
     int saveChunk(string chunkFilename);
+    
+    void listener() override;
 };
 
 #endif /* StorageNode_hpp */

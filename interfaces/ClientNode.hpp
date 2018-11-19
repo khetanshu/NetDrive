@@ -18,10 +18,9 @@
 
 using namespace::std;
 
-class ClientNode : Communication{
+class ClientNode :public Communication{
     //TO:DO device information to be added later during integration
     vector<chunk> chunks;
-    
     
 private:
    
@@ -35,8 +34,13 @@ private:
     
     
 public:
+    
+    void listener() override;
+    
     bool storeFile(string filename);
     bool retriveFile(string filename);
+    
+    
     
 };
 
