@@ -27,6 +27,7 @@ protected:
 public:
     Communication();
     void server(int port);
+    void act(char *buffer, int buffer_len);
     void client(int port, char const *ip);
     void parse(char *buffer, int buffer_len);
 };

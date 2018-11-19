@@ -6,6 +6,10 @@
 
 #include "ClientNode.hpp"
 
+void ClientNode::act(char *buffer, int buffer_len) {
+
+    std::cout << "hello" << endl;
+}
 
 vector<chunk> ClientNode::splitFile(string fileName, vector<chunk>& chunks)
 {
