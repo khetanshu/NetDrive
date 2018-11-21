@@ -9,19 +9,8 @@
 
 using namespace std;
 
-void stringToInt(int i, char *p) {
-
-    p += 4;
-    return (*(p-4) << 24) 
-        | (*(p-3) << 16)
-        | (*(p-2) << 8)
-        | (*(p-1) << 0);
-}
-
-void intToString(char *p, int i) {
-
-    p += 4;
-    return (int);
+void Communication::listener() {
+    cerr << "" << endl;
 }
 
 Communication::Communication() {
@@ -92,12 +81,8 @@ void Communication::server(int port) {
     				chunks[i].storageNode = (int) *(p++);
 
     				// serialize int from byte array.
-    				chunks[i].chunkID = 
-    					
+    				chunks[i].chunkID = 2;
 
-    				p+=4;
-
-                    chunks[i].
     					
     			}
 		    	break;

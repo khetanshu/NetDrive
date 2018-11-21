@@ -31,7 +31,6 @@ public:
     void client(int port, char const *ip);
     void parse(char *buffer, int buffer_len);
     
-    
     virtual void listener();
 };
 

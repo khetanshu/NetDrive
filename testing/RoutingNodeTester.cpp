@@ -51,7 +51,7 @@ void RoutingNodeTester::fileSearchAndPrint(RoutingNode& routingNode, string file
 int main() {
 
     RoutingNode node;
-    node.server(8080);
+    node.listener();
 
     return 0;
 }
