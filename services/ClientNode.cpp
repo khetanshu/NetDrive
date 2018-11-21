@@ -6,10 +6,8 @@
 
 #include "ClientNode.hpp"
 
-vector<chunk> ClientNode::splitFile(string fileName, vector<chunk>& chunks)
+void ClientNode::splitFile(string fileName, vector<chunk>& chunks)
 {
-    
-    vector<chunk> ck;//TODOD
     
     int peek = 0, i = 0;
     string line;
@@ -33,25 +31,22 @@ vector<chunk> ClientNode::splitFile(string fileName, vector<chunk>& chunks)
     }
     
     
-    // //  splitting file into chunks
-    // for(auto &size: sizes)
-    // {
-    //     try
-    //     {
-    //         ofstream o_file(fileName+"-"+to_string(i++));
-    //         o_file << buffer.substr(peek, size);
-    //         o_file.close();
-    //         peek+=size;
-    //         cout << endl;
-    //     }
-    //     catch (exception const& e)
-    //     {
-    //         cerr << "Error ocurred while writing file!\n" << e.what() << endl;
-    //     }
-    // }
-    //TODO
-    return chunks;
-    
+    //  splitting file into chunks
+    for(auto &chunk: chunks)
+    {
+        try
+        {
+            ofstream o_file(to_string(chunk.chunkID));
+            o_file << buffer.substr(peek, chunk.size);
+            o_file.close();
+            peek+=chunk.size;
+            cout << endl;
+        }
+        catch (exception const& e)
+        {
+            cerr << "Error ocurred while writing file!\n" << e.what() << endl;
+        }
+     }
 } 
 
 
