@@ -6,6 +6,7 @@
 
 #include "ClientNode.hpp"
 
+#include <sys/stat.h>
 
 ClientNode::ClientNode(){
     //registering the storage nodes
@@ -188,7 +189,12 @@ void ClientNode::listener(int argc, const char * argv[]) {
     }
     else { cout << "[ERROR]: bad usage" << endl; exit(1); }
     
-    
+    struct stat st;
+    if (stat(argv[2], &st) < 0) {
+        cerr << "[ERROR]: file doesn't exist locally" << endl;
+        exit(EXIT_FAILURE);
+    }
+
     int i = 0;
     while ((send_it[3 + i] = argv[2][i]) != '\0') {  i++; }
     
@@ -250,17 +256,29 @@ void ClientNode::listener(int argc, const char * argv[]) {
     if (send_it[0] == 1) {
         
         if (buffer[1] == 3) {
-            cerr << "[ERROR]: file exists" << endl;
+            cerr << "[ERROR]: file exists on cloud" << endl;
             exit(EXIT_FAILURE);
         }
         
         // 3. send the file size
+
+        // TODO: this should probably be in it's own
+        // function for better portability depending on
+
         send_it[1] = 2;
         send_it[2] = 4;
-        
-        // TODO: get data size dynamically
-        int data_size = 4;
-        memcpy(&send_it[3], &data_size, sizeof(int));
+
+        // TODO: we currently compress the data size into mb, 
+        // that means we have to add a ceiling if there is any
+        // remainder from conversion from bytes to MB.
+
+        // in the future, we should make size a long and
+        // just send the exact byte amount.
+
+        int file_size = st.st_size / (1024 * 1024);
+        file_size += (st.st_size / (1024 * 1024)) ? 1 : 0;
+
+        memcpy(&send_it[3], &file_size, sizeof(int));
         
         send(sock, send_it, sizeof(send_it), 0);
         

@@ -26,6 +26,7 @@ void RoutingNode::registerDevices(){
     nodeCapacityIndex[1]= 2048;//in MB
     cout<<"Node["<<1<<"] default capacity:"<<nodeCapacityIndex[1]<<endl;
     
+    totalRemainingStorageCapacity += (1024 + 2048);
     
 //    int defaultCapacity=1; //TODO to be made more generic
 //    for (int i=0; i<totalStorageNodes; i++) {
@@ -47,8 +48,6 @@ vector<chunk>* RoutingNode::generateChunkInfo(long fileSize){
     unordered_map<int, long> newReservation;
     while(fileSize>0){
 
-        cout << "srsly" << endl;
-
         int  r = (int) fileSize/totalStorageNodesNotEmpty;
         long blockSize = min(minStorageCapacity,(r==0?fileSize:r));
         for (int i=0; i<totalStorageNodes; i++) {
@@ -69,8 +68,7 @@ vector<chunk>* RoutingNode::generateChunkInfo(long fileSize){
             if(fileSize ==0) break;
         }
     }
-    
-    cout << "done" << endl;
+
     //creating a list of chunks with the reserved capacities
     vector<chunk>* chunks = new vector<chunk>();
     for (int i=0; i<totalStorageNodes; i++) {
