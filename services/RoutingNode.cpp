@@ -9,7 +9,7 @@
 using namespace std;
 
 RoutingNode::RoutingNode(){
-    totalStorageNodes = 3;//TODO : Need to make it data driven
+    totalStorageNodes = 2;//TODO : Need to make it data driven
     totalStorageNodesNotEmpty = totalStorageNodes;
     lastestChunkID = 0;
     minStorageCapacity = INT_MAX;
@@ -23,7 +23,7 @@ void RoutingNode::registerDevices(){
     int defaultCapacity=5; //TODO to be made more generic
     for (int i=0; i<totalStorageNodes; i++) {
         int capacity =defaultCapacity+(i%totalStorageNodes)+1;
-        nodeCapacityIndex[i]= capacity;//defaultCa`pacity; //In MB/GB as per the assumption , TODO :: make data driven
+        nodeCapacityIndex[i]= capacity;//defaultCapacity; //In MB/GB as per the assumption , TODO :: make data driven
         cout<<"Node["<<i<<"] default capacity:"<<nodeCapacityIndex[i]<<endl;
         totalRemainingStorageCapacity += capacity;
     }
