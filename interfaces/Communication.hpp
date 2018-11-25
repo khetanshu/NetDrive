@@ -1,5 +1,5 @@
 //
-//  communication.hpp
+//  Communication.hpp
 //  NetDrive
 //
 //

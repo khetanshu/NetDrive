@@ -32,14 +32,20 @@ void ServiceTester::_unit_test_RoutingNode(){
     cout<<endl;
 }
 
-void _unit_test_StorageNode(){
+void ServiceTester::_unit_test_StorageNode(){
     //TODO
 }
 
-void _unit_test_ClientNode(){
+void ServiceTester::_unit_test_ClientNode(){
     //TODO
 }
 
+
+void ServiceTester::_unit_test_Communication(){
+        //TODO
+    Communication comm;
+    comm.retreiveFile("scu", "~/test.txt", "~/temp/");
+}
 
 //void ServiceTester::_unit_test_StorageNode(){
 //    StorageNode storageNode;

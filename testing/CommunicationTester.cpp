@@ -1,10 +1,9 @@
-#include "RoutingNode.hpp"
-#include "ClientNode.hpp"
-#include "ClientNode.hpp"
+//
+//  CommunicationTester.cpp
+//  NetDrive
+//
+//  Created by khetanshu on 11/25/18.
+//  Copyright © 2018 khetanshu. All rights reserved.
+//
 
-int main() {
-	
-	ClientNode node;
-	node.client(8080, "127.0.0.1");
-	return 0;
-}
+#include "CommunicationTester.hpp"

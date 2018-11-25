@@ -5,9 +5,7 @@
 //
 
 #include "Communication.hpp"
-#include "Types.hpp"
 
-using namespace std;
 
 void Communication::listener(int argc, const char * argv[]) {
     cerr << "[ERROR] no inheritance" << endl;
@@ -155,6 +153,7 @@ int Communication::sendFile(string hostssh, string filename, string destPath){
 int Communication::retreiveFile(string hostssh, string filename, string destPath){
     //Format of :: command = "scp ~/test.txt scu:~/OS_Project/";
     string command = "scp " + hostssh + ":"+ filename  + " " + destPath;
+    cout<<command;
     return system(command.c_str());
 }
 
