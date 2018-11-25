@@ -9,7 +9,7 @@
 
 #include <iostream>
 #include <unistd.h>
-#include "types.hpp"
+#include "Types.hpp"
 #include "Communication.hpp"
 #include "unordered_map"
 #include "vector"
