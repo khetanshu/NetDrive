@@ -10,7 +10,7 @@
 ClientNode::ClientNode(){
     //registering the storage nodes
     registerStorageNodeSSH("scu");//TODO : make it data driven - custom
-//    registerStorageNodeSSH("myRaspberryPi");
+    registerStorageNodeSSH("jayantScu");//TODO : make it data driven - custom
 }
 
 void ClientNode:: registerStorageNode(string hostname, string port){

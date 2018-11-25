@@ -20,13 +20,20 @@ RoutingNode::RoutingNode(){
 
 void RoutingNode::registerDevices(){
     cout<<"**** Device Registration ****"<<endl;
-    int defaultCapacity=5; //TODO to be made more generic
-    for (int i=0; i<totalStorageNodes; i++) {
-        int capacity =defaultCapacity+(i%totalStorageNodes)+1;
-        nodeCapacityIndex[i]= capacity;//defaultCapacity; //In MB/GB as per the assumption , TODO :: make data driven
-        cout<<"Node["<<i<<"] default capacity:"<<nodeCapacityIndex[i]<<endl;
-        totalRemainingStorageCapacity += capacity;
-    }
+    nodeCapacityIndex[0]= 1024;//in MB
+    cout<<"Node["<<0<<"] default capacity:"<<nodeCapacityIndex[0]<<endl;
+    
+    nodeCapacityIndex[1]= 2048;//in MB
+    cout<<"Node["<<1<<"] default capacity:"<<nodeCapacityIndex[1]<<endl;
+    
+    
+//    int defaultCapacity=1; //TODO to be made more generic
+//    for (int i=0; i<totalStorageNodes; i++) {
+//        int capacity =defaultCapacity+(i%totalStorageNodes)+1;
+//        nodeCapacityIndex[i]= capacity;//defaultCapacity; //In MB/GB as per the assumption , TODO :: make data driven
+//        cout<<"Node["<<i<<"] default capacity:"<<nodeCapacityIndex[i]<<endl;
+//        totalRemainingStorageCapacity += capacity;
+//    }
     cout<<endl;
 }
 
