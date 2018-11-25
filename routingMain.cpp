@@ -9,7 +9,7 @@
 
 #include "RoutingNode.hpp"
 
-int main(){
+int main(int argc, const char * argv[]){
     RoutingNode node;
     node.listener(argc, argv);
 }
