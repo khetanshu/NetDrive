@@ -42,8 +42,9 @@ public:
     
     void listener(int argc, const char * argv[]) override;
     
-    bool storeFile(string filename);
-    bool retriveFile(vector<chunk> chunks);
+    //TODO : suppressed for a while
+    //    bool storeFile(string filename);
+    //    bool retriveFile(string filename);
     
     
     
