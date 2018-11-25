@@ -98,7 +98,7 @@ bool ClientNode::mergeFile(string filename, vector<chunk>* chunks)
     
     try
     {
-        ofstream o_file(fileName);
+        ofstream o_file(filename);
         o_file << buffer;
         o_file.close();
         cout << endl;
