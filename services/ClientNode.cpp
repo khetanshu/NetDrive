@@ -26,17 +26,18 @@ void ClientNode::registerStorageNodeSSH(string nodeSSH){
     storageNodesInfo.push_back(storageNode);
 }
 
-void ClientNode::splitFile(string fileName, vector<chunk>* chunks)
+void ClientNode::splitFile(string filename, vector<chunk>* chunks)
 {
     
     int peek = 0, i = 0;
     string line;
     string buffer = "";
-    
+    filename = "../download/"+filename; 
+
     //  reading file to buffer
     try
     {
-        ifstream i_file(fileName);
+        ifstream i_file(filename);
         while (!i_file.eof())
         {
             getline(i_file, line);
@@ -56,7 +57,8 @@ void ClientNode::splitFile(string fileName, vector<chunk>* chunks)
     {
         try
         {
-            ofstream o_file(to_string(chunk.chunkID));
+            string file = "../upload/"+to_string(chunk.chunkID);
+            ofstream o_file(file);
             o_file << buffer.substr(peek, chunk.size);
             o_file.close();
             peek+=chunk.size;
@@ -75,12 +77,13 @@ bool ClientNode::mergeFile(string filename, vector<chunk>* chunks)
 {
     string buffer = "";
     string line;
-    
+    filename = "../download/"+filename;
     try
     {
         for(auto &chunk: *chunks)
         {
-            ifstream i_file(to_string(chunk.chunkID));
+            string file = "../upload/"+to_string(chunk.chunkID);
+            ifstream i_file(file);
             while(!i_file.eof())
             {
                 getline(i_file, line);
@@ -292,25 +295,25 @@ void ClientNode::listener(int argc, const char * argv[]) {
     
     vector<chunk> chunks;
     chunks.reserve(num_chunks);
-    
-    cout << "[INFO]: num chunks = " << num_chunks << endl;
-    
+
+    // cout << "[INFO]: num chunks = " << num_chunks << endl;
+
     for (int i = 0; i < num_chunks; i++) {
         
         send(sock, send_it, sizeof(send_it), 0);
         read(sock, buffer, sizeof(buffer));
         
         memcpy(&chunks[i], &buffer[3], sizeof(chunk));
-        
-        cout << "chunk " << i << " of " << num_chunks << endl;
-        cout << "  chunkID = " << chunks[i].chunkID << endl;
-        cout << "  storageNode = " << chunks[i].storageNode << endl;
-        cout << "  size = " << chunks[i].size << endl;
-        cout << "  sequenceID = " << chunks[i].sequenceID << endl;
+
+        // cout << "chunk " << i << " of " << num_chunks << endl;
+        // cout << "  chunkID = " << chunks[i].chunkID << endl;
+        // cout << "  storageNode = " << chunks[i].storageNode << endl;
+        // cout << "  size = " << chunks[i].size << endl;
+        // cout << "  sequenceID = " << chunks[i].sequenceID << endl;
     }
-    
-    cout << "[INFO]: successfully read" << endl;
-    
+
+    // cout << "[INFO]: successfully read" << endl;
+
     // 6. confirm success and close the connection
     send(sock, send_it, sizeof(send_it), 0);
     close(sock);

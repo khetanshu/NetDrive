@@ -16,7 +16,7 @@ void ServiceTester::_unit_test_RoutingNode(){
     printRemainingNodeCapacities(routingNode);
     fileStoreAndPrint(routingNode, "file2", 4);
     printRemainingNodeCapacities(routingNode);
-    fileStoreAndPrint(routingNode, "file3", 7);
+    fileStoreAndPrint(routingNode, "file3", 6);
     printRemainingNodeCapacities(routingNode);
     fileStoreAndPrint(routingNode, "file4", 4);
     printRemainingNodeCapacities(routingNode);
