@@ -113,19 +113,23 @@ long RoutingNode::getTotalRemainingStorageCapacity(){
 }
 
 
-void RoutingNode::listener() {
+void RoutingNode::listener(int argc, const char * argv[]) {
 
     int port = 8080;
     struct sockaddr_in addr; 
     int server, client, addr_len = sizeof(addr); 
     char buffer[256] = {0}; 
     char send_it[256] = {0};
+    vector<chunk> chunks; 
        
     if ((server = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == 0) { 
         cerr << "[ERROR]: socket creation failed" << endl; 
         exit(EXIT_FAILURE); 
     } 
-       
+    
+    int o = 1;
+    setsockopt(server, SOL_SOCKET, SO_REUSEADDR, &o, sizeof(o)); 
+
     addr.sin_family = AF_INET; 
     addr.sin_addr.s_addr = INADDR_ANY; 
     addr.sin_port = htons(port); 
@@ -148,7 +152,7 @@ void RoutingNode::listener() {
     // set up listener
     for(;;) {
 
-        cout << "[INFO]: listening..." << endl;
+        cout << "[INFO]: listening..." << endl << endl;
         if ((client = accept(
                 server, 
                 (struct sockaddr *) &addr,  
@@ -164,52 +168,107 @@ void RoutingNode::listener() {
 
         send_it[0] = buffer[0];
 
-        // 2. for now the header is unimportant, we must search
+        int file_len = (int) buffer[2];
+        char *file = (char *) malloc(sizeof(char) * (file_len + 1));
+
+        memcpy(file, &buffer[3], file_len);
+        file[file_len] = '\0';
+
+        cout << "[INFO]: file name = " << file << endl;
+        cout << "[INFO]: filename len = " << file_len << endl;
+
+        // 2.0 check if the file exists or not
         int length = (int) buffer[3];
+        bool file_exists = (fileIndex.find(file) != fileIndex.end());
 
-        // I guess checking if file exists is not ready, so 
-        // for now always return true
-        send_it[1] = 5;
-
+       
+        // 2.1 let client know file exists
+        send_it[1] = file_exists ? 3 : 5;
         send(client, send_it, sizeof(send_it), 0);
 
-        // 3. get the file size
-        read(client, buffer, 256);
+        if(send_it[0] == 1) {
 
-        // lots of hacking, we know what the int size will be
-        // so don't bother looking at buffer[2]
-        int file_size = 0;
-        memcpy(&file_size, &buffer[3], sizeof(int));
+            /**
+             * STORE FILE FUNCTIONALITY
+             *
+             * for now, we'll just keep the 2 fncts in an if stmt,
+             * the next step would be to make the sockets member vars
+             * and call a send() and retrieve() function outside of 
+             * the listener
+             **/
 
-        // dbg
-        cout << "[INFO]: file size from client = " << file_size << endl;
+            // 2.2 exit if file exists and it's a store
+            if (file_exists) continue;
 
-        // 4. check if we can hold the file;
-        if (! canStore((long) file_size)) {
+            // 3.0 get the file size
+            read(client, buffer, 256);
 
-            send_it[1] = 4;
-            cerr << "[ERROR]: storage nodes full" << endl;
-            close(client); 
-            continue;
+            // 3.1 lots of hacking, we know what the int size will be
+            // so don't bother looking at buffer[2]
+
+            int file_size = 0;
+            memcpy(&file_size, &buffer[3], sizeof(int));
+
+            // dbg
+            cout << "[INFO]: file size from client = " << file_size << endl;
+            cout << "[INFO]: remaining storage = " << totalRemainingStorageCapacity << endl;
+
+            for (int i=0; i<totalStorageNodes; i++) {
+                cout <<"[INFO]: node " << i << " capacity = " <<  nodeCapacityIndex[i] << endl;
+            }
+
+            // 4. check if we can hold the file;
+            if (! canStore((long) file_size)) {
+
+                send_it[1] = 4;
+                cerr << "[ERROR]: storage nodes full" << endl;
+                close(client); 
+                continue;
+            }
+
+            send_it[1] = 5;
+            send(client, send_it, sizeof(send_it), 0);
+
+            // 5. client ready, send num chunks
+            chunks = storeFile(file, (long) file_size);
+            send_it[3] = (char) chunks.size();
         }
+        else if (send_it[0] == 2) {
+            
+            /**
+             * RETRIEVE FILE FUNCTIONALITY
+             * 
+             * Again, this should be in its own file sometime
+             * in the future, however issues with scope make moving
+             * this to a clearer implementation is difficult 
+             * right now
+             **/
 
-        send_it[1] = 5;
-        send(client, send_it, sizeof(send_it), 0);
+            // retry if file doesn't exist
+            cout << "[INFO]: file not found on search" << endl;
+            if (! file_exists) continue;
 
-        // 5. client ready, send num chunks
+            chunks = fileIndex[file];
+            send_it[3] = (char) chunks.size();
+        }
+       
+        /**
+         * COMBINED FUNCTIONALITY
+         * 
+         * In the end, both send and store just send chunks back 
+         * to the client, so we'll reuse the code for both of 
+         * these cases.
+         **/
+
         read(client, buffer, 256);
-        
-        vector<chunk> *chunks = generateChunkInfo((long) file_size);
-
-        send_it[3] = (char) chunks->size();
         send(client, send_it, sizeof(send_it), 0);
 
-        cout << "[INFO]: chunks made = " << chunks->size() << endl;
+        cout << "[INFO]: chunks made = " << chunks.size() << endl;
         // 6. pass the chunks to the client
-        for (int i = 0; i < chunks->size(); i++) {
+        for (int i = 0; i < chunks.size(); i++) {
 
             cout << "[INFO]: sent chunk " << i << endl;
-            memcpy(&send_it[3], &chunks->at(i), sizeof(chunk));
+            memcpy(&send_it[3], &chunks.at(i), sizeof(chunk));
 
             // again, skipping the data size parameter, 
             // the more I write this the less it feels 
@@ -221,9 +280,8 @@ void RoutingNode::listener() {
 
         // 7. all done, close client and free mem
         read(client, buffer, 256);
-
+        
         cout << "[INFO]: cleaning up" << endl << endl;
-        delete chunks;
         close(client); 
     }
 }

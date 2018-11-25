@@ -35,7 +35,7 @@ private:
     
 public:
     
-    void listener() override;
+    void listener(int argc, const char * argv[]) override;
     
     bool storeFile(string filename);
     bool retriveFile(string filename);

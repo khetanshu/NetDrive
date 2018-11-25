@@ -48,10 +48,10 @@ void RoutingNodeTester::fileSearchAndPrint(RoutingNode& routingNode, string file
     
 }
 
-int main() {
+int main(int argc, const char * argv[]) {
 
     RoutingNode node;
-    node.listener();
+    node.listener(argc, argv);
 
     return 0;
 }

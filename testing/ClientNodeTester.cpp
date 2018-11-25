@@ -6,10 +6,10 @@
 
 #include "ClientNodeTester.hpp"
 
-int main() {
+int main(int argc, const char * argv[]) {
 
     ClientNode node;
-    node.listener();
+    node.listener(argc, argv);
 
     return 0;
 }

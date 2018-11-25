@@ -9,8 +9,8 @@
 
 using namespace std;
 
-void Communication::listener() {
-    cerr << "" << endl;
+void Communication::listener(int argc, const char * argv[]) {
+    cerr << "[ERROR] no inheritance" << endl;
 }
 
 Communication::Communication() {

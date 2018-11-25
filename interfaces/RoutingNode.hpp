@@ -53,7 +53,7 @@ public:
     int getTotalStorageNodes();
     long getTotalRemainingStorageCapacity();
     
-    void listener() override;
+    void listener(int argc, const char * argv[]) override;
 };
 
 
