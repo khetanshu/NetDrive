@@ -26,7 +26,7 @@ void ClientNode::registerStorageNodeSSH(string nodeSSH){
     storageNodesInfo.push_back(storageNode);
 }
 
-void ClientNode::splitFile(string fileName, vector<chunk>& chunks)
+void ClientNode::splitFile(string fileName, vector<chunk>* chunks)
 {
     
     int peek = 0, i = 0;
@@ -52,7 +52,7 @@ void ClientNode::splitFile(string fileName, vector<chunk>& chunks)
     
     
     //  splitting file into chunks
-    for(auto &chunk: chunks)
+    for(auto &chunk: *chunks)
     {
         try
         {
@@ -68,6 +68,49 @@ void ClientNode::splitFile(string fileName, vector<chunk>& chunks)
         }
      }
 } 
+
+
+// merge the file chunks and returns true if merged successfully
+bool ClientNode::mergeFile(string filename, vector<chunk>* chunks)
+{
+    string buffer = "";
+    string line;
+
+    try
+    {
+        for(auto &chunk: *chunks)
+        {
+            ifstream i_file(to_string(chunk.chunkID));
+            while(!i_file.eof())
+            {
+                getline(i_file, line);
+                buffer+=line;
+                buffer+="\n";
+            }
+            i_file.close();
+        }
+    }
+    catch(exception e)
+    {
+        cerr << "Error occured while reading file!\n" << e.what() << endl;
+        return false;
+    }
+    
+    try
+    {
+        ofstream o_file(fileName);
+        o_file << buffer;
+        o_file.close();
+        cout << endl;
+    }
+    catch(exception e)
+    {
+        cerr << "Error occured while reading file!\n" << e.what() << endl;
+        return false;
+    }
+
+    return true;
+}
 
 
 bool ClientNode::transferFileToCloud(vector<chunk>& chunks){
