@@ -30,11 +30,12 @@ private:
     void splitFile(string filename, vector<chunk>* chunks); // splits the file to given chunk sizes
     bool mergeFile(string filename, vector<chunk>* chunks); // merge chunks of file into file with given filename
     
-    bool transferFileToCloud(vector<chunk>& chunks);
     bool transferChunkToStorageNode(chunk chunk);
-    
-    bool retriveFileFromCloud(vector<chunk> chunks);
     bool retriveChunkFromStorageNode(chunk chunk);
+   
+protected:
+    bool transferFileToCloud(vector<chunk>& chunks);
+    bool retriveFileFromCloud(vector<chunk> chunks);
     
 public:
     
