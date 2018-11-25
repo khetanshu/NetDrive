@@ -12,20 +12,20 @@
 #include "types.hpp"
 #include "Communication.hpp"
 #include "unordered_map"
-
+#include "vector"
 using namespace std;
 
 class StorageNode : Communication{
     unordered_map<int,string> chunkIndex; //Keeps track of chunk ID and its filepath
-    
+    vector<nodeInfo> clientNodesInfo;
 private:
     string getChunkPath(int chunkID);
-    
+    void registerClientNodeSSH(string nodeSSH);
+    void registerClientNode(string hostname, string port);
 public:
-    int sendChunk(string chunkFilename, string storageNodePath);
+    StorageNode();
     int saveChunk(string chunkFilename);
-    
-    void listener() override;
+    void listener(int argc, const char * argv[]) override;
 };
 
 #endif /* StorageNode_hpp */

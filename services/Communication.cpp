@@ -18,6 +18,7 @@ Communication::Communication() {
 	return;
 }
 
+
 void Communication::server(int port) {
 
 	struct sockaddr_in addr; 
@@ -142,4 +143,11 @@ void Communication::client(int port, char const *ip) {
     cout << buffer << endl; 
 
     close(sock);
+}
+
+
+int Communication::sendFile(string hostssh, string filename, string destPath){
+    //Format of :: command = "scp ~/test.txt scu:~/OS_Project/";
+    string command = "scp " + filename + " " + hostssh + ":" + destPath;
+    return system(command.c_str());
 }

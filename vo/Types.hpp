@@ -22,4 +22,12 @@ typedef struct packet {
     char* data;
 } packet;
 
+typedef struct nodeInfo {
+    std::string hostname;
+    std::string port;
+    //or
+    std::string hostssh;
+}nodeInfo;
+
+
 #endif /* Types_h */

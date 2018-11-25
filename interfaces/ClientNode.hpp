@@ -21,9 +21,11 @@ using namespace::std;
 class ClientNode :public Communication {
     //TO:DO device information to be added later during integration
     vector<chunk> chunks;
+    vector<nodeInfo> storageNodesInfo;
     
 private:
-   
+    void registerStorageNodeSSH(string nodeSSH);
+    void registerStorageNode(string hostname, string port);
     void splitFile(string filename, vector<chunk>& chunks); // splits the file to given chunk sizes
     bool mergeFile(string filename, vector<chunk>& chunks); // merge chunks of file into file with given filename
     
@@ -34,6 +36,8 @@ private:
     
     
 public:
+    
+    ClientNode();
     
     void listener(int argc, const char * argv[]) override;
     

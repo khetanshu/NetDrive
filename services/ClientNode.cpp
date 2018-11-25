@@ -6,6 +6,26 @@
 
 #include "ClientNode.hpp"
 
+
+ClientNode::ClientNode(){
+    //registering the storage nodes
+    registerStorageNodeSSH("storageNode1");//TODO : make it data driven - custom
+    registerStorageNodeSSH("storageNode2");
+}
+
+void ClientNode:: registerStorageNode(string hostname, string port){
+    nodeInfo storageNode;
+    storageNode.hostname = hostname;
+    storageNode.port = port;
+    storageNodesInfo.push_back(storageNode);
+}
+
+void ClientNode::registerStorageNodeSSH(string nodeSSH){
+    nodeInfo storageNode;
+    storageNode.hostssh = nodeSSH;
+    storageNodesInfo.push_back(storageNode);
+}
+
 void ClientNode::splitFile(string fileName, vector<chunk>& chunks)
 {
     
@@ -58,13 +78,11 @@ bool ClientNode::transferFileToCloud(vector<chunk>& chunks){
 }
 
 bool ClientNode::transferChunkToStorageNode(chunk chunk){
-    //TODO;
-    
-    
-    
-    
-    
-    return true;
+    nodeInfo nodeInfo = storageNodesInfo[chunk.storageNode]; //extracting the registered system information
+    std::string chunkFilename = to_string(chunk.chunkID) + ".txt";
+    std::string storageNodePath = "~/"; //like command = "scp ~/test.txt scu:~/OS_Project/";
+    std::string hostssh = nodeInfo.hostssh;
+    return sendFile(hostssh,chunkFilename,storageNodePath);
 }
 
 
