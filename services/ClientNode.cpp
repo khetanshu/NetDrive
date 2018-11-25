@@ -114,19 +114,36 @@ bool ClientNode::mergeFile(string filename, vector<chunk>* chunks)
 
 
 bool ClientNode::transferFileToCloud(vector<chunk>& chunks){
+    bool status = true;
     for(chunk c : chunks){
-        transferChunkToStorageNode(c);
+        status = status & transferChunkToStorageNode(c);
     }
-    return true;
+    return status;
 }
 
 bool ClientNode::transferChunkToStorageNode(chunk chunk){
     nodeInfo nodeInfo = storageNodesInfo[chunk.storageNode]; //extracting the registered system information
-    std::string chunkFilename = to_string(chunk.chunkID) + ".txt";
-    std::string storageNodePath = "~/"; //like command = "scp ~/test.txt scu:~/OS_Project/";
+    std::string chunkFilename = to_string(chunk.chunkID) ; //Currently chunk won't have any extension. TODO make is generic
+    std::string storageNodePath = "~/upload/"; //like command = "scp ~/test.txt scu:~/OS_Project/";
     std::string hostssh = nodeInfo.hostssh;
     return sendFile(hostssh,chunkFilename,storageNodePath);
 }
+
+bool ClientNode::retriveFileFromCloud(vector<chunk> chunks){
+    bool status = true;
+    for(chunk cnk : chunks){
+        status = status & retriveChunkFromStorageNode(cnk);
+    }
+    return status;
+}
+
+bool ClientNode::retriveChunkFromStorageNode(chunk chunk){
+    string hostssh = storageNodesInfo[chunk.storageNode].hostssh;
+    string filename = to_string(chunk.chunkID);
+    string destPath = "./download/";
+    return retreiveFile(hostssh, filename, destPath) == 0 ? true : false;;
+}
+
 
 
 void ClientNode::listener(int argc, const char * argv[]) {

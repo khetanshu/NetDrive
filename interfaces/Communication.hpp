@@ -17,6 +17,8 @@
 
 #include "Types.hpp"
 
+using namespace::std;
+
 class Communication{
 
 private:
@@ -32,7 +34,8 @@ public:
     void parse(char *buffer, int buffer_len);
     
     virtual void listener(int argc, const char * argv[]);
-    int sendFile(string hostssh,string chunkFilename, string storageNodePath);
+    int sendFile(string hostssh, string filename, string destPath);
+    int retreiveFile(string hostssh, string filename, string destPath);
 };
 
 

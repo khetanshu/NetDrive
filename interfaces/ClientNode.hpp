@@ -26,14 +26,15 @@ class ClientNode :public Communication {
 private:
     void registerStorageNodeSSH(string nodeSSH);
     void registerStorageNode(string hostname, string port);
+    
     void splitFile(string filename, vector<chunk>* chunks); // splits the file to given chunk sizes
     bool mergeFile(string filename, vector<chunk>* chunks); // merge chunks of file into file with given filename
     
     bool transferFileToCloud(vector<chunk>& chunks);
-
-    
     bool transferChunkToStorageNode(chunk chunk);
     
+    bool retriveFileFromCloud(vector<chunk> chunks);
+    bool retriveChunkFromStorageNode(chunk chunk);
     
 public:
     
@@ -42,7 +43,7 @@ public:
     void listener(int argc, const char * argv[]) override;
     
     bool storeFile(string filename);
-    bool retriveFile(string filename);
+    bool retriveFile(vector<chunk> chunks);
     
     
     
