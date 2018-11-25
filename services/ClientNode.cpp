@@ -98,7 +98,7 @@ bool ClientNode::mergeFile(string filename, vector<chunk>* chunks)
     
     try
     {
-        ofstream o_file(fileName);
+        ofstream o_file(filename);
         o_file << buffer;
         o_file.close();
         cout << endl;
@@ -276,7 +276,7 @@ void ClientNode::listener(int argc, const char * argv[]) {
     vector<chunk> chunks;
     chunks.reserve(num_chunks);
 
-    cout << "[INFO]: num chunks = " << num_chunks << endl;
+    // cout << "[INFO]: num chunks = " << num_chunks << endl;
 
     for (int i = 0; i < num_chunks; i++) {
 
@@ -285,14 +285,14 @@ void ClientNode::listener(int argc, const char * argv[]) {
 
         memcpy(&chunks[i], &buffer[3], sizeof(chunk));
 
-        cout << "chunk " << i << " of " << num_chunks << endl;
-        cout << "  chunkID = " << chunks[i].chunkID << endl;
-        cout << "  storageNode = " << chunks[i].storageNode << endl;
-        cout << "  size = " << chunks[i].size << endl;
-        cout << "  sequenceID = " << chunks[i].sequenceID << endl;
+        // cout << "chunk " << i << " of " << num_chunks << endl;
+        // cout << "  chunkID = " << chunks[i].chunkID << endl;
+        // cout << "  storageNode = " << chunks[i].storageNode << endl;
+        // cout << "  size = " << chunks[i].size << endl;
+        // cout << "  sequenceID = " << chunks[i].sequenceID << endl;
     }
 
-    cout << "[INFO]: successfully read" << endl;
+    // cout << "[INFO]: successfully read" << endl;
 
     // 6. confirm success and close the connection
     send(sock, send_it, sizeof(send_it), 0);

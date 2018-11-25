@@ -17,6 +17,8 @@
 
 #include "Types.hpp"
 
+using namespace std;
+
 class Communication{
 
 private:

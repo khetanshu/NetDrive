@@ -6,11 +6,14 @@
 
 #include "RoutingNode.hpp"
 
+using namespace std;
+
 RoutingNode::RoutingNode(){
     totalStorageNodes = 3;//TODO : Need to make it data driven
     totalStorageNodesNotEmpty = totalStorageNodes;
     lastestChunkID = 0;
     minStorageCapacity = INT_MAX;
+    totalRemainingStorageCapacity = 0;
     registerDevices();
     
 }
@@ -36,7 +39,10 @@ bool RoutingNode::canStore(long newFileSize){
 vector<chunk>* RoutingNode::generateChunkInfo(long fileSize){
     unordered_map<int, long> newReservation;
     while(fileSize>0){
-        long r = fileSize/totalStorageNodesNotEmpty;
+
+        cout << "srsly" << endl;
+
+        int  r = (int) fileSize/totalStorageNodesNotEmpty;
         long blockSize = min(minStorageCapacity,(r==0?fileSize:r));
         for (int i=0; i<totalStorageNodes; i++) {
             if(nodeCapacityIndex[i] >= blockSize){
@@ -57,6 +63,7 @@ vector<chunk>* RoutingNode::generateChunkInfo(long fileSize){
         }
     }
     
+    cout << "done" << endl;
     //creating a list of chunks with the reserved capacities
     vector<chunk>* chunks = new vector<chunk>();
     for (int i=0; i<totalStorageNodes; i++) {
@@ -222,6 +229,7 @@ void RoutingNode::listener(int argc, const char * argv[]) {
 
                 send_it[1] = 4;
                 cerr << "[ERROR]: storage nodes full" << endl;
+                send(client, send_it, sizeof(send_it), 0);
                 close(client); 
                 continue;
             }
@@ -230,6 +238,7 @@ void RoutingNode::listener(int argc, const char * argv[]) {
             send(client, send_it, sizeof(send_it), 0);
 
             // 5. client ready, send num chunks
+            cout << "[INFO]: preparing to send" << endl;
             chunks = storeFile(file, (long) file_size);
             send_it[3] = (char) chunks.size();
         }
@@ -282,6 +291,7 @@ void RoutingNode::listener(int argc, const char * argv[]) {
         read(client, buffer, 256);
         
         cout << "[INFO]: cleaning up" << endl << endl;
+        free(file);
         close(client); 
     }
 }
