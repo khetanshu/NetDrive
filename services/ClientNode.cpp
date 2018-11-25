@@ -116,7 +116,7 @@ bool ClientNode::mergeFile(string filename, vector<chunk>* chunks)
 }
 
 
-bool ClientNode::transferFileToCloud(vector<chunk>& chunks){
+bool ClientNode::transferFileToCloud(vector<chunk> chunks){
     bool status = true;
     for(chunk c : chunks){
         status = status & transferChunkToStorageNode(c);
@@ -167,16 +167,24 @@ void ClientNode::listener(int argc, const char * argv[]) {
         exit(1);
     }
     
-    // choose which function to callback
-    int callback;
-    
-    if (! strcmp( "search", argv[1])) {
+    /**
+     * PACKET HEADER
+     *
+     * packet[0] = 1 - store file
+     * packet[0] = 2 - retrieve file
+     
+     * packet[0] != {1,2} - error, undefined request
+     **/
+
+    if (! strcmp( "store", argv[1])) {
+
+        // store file
         send_it[0] = 1;
-        callback = 0;
     }
-    else if (! strcmp("store", argv[1])) {
+    else if (! strcmp("retrieve", argv[1])) {
+
+        // search file
         send_it[0] = 2;
-        callback = 1;
     }
     else { cout << "[ERROR]: bad usage" << endl; exit(1); }
     
@@ -211,18 +219,7 @@ void ClientNode::listener(int argc, const char * argv[]) {
         cerr << "[ERROR]: connection refused" << endl;
         exit(EXIT_FAILURE);
     }
-    
-    /**
-     * PACKET HEADER
-     *
-     * packet[0] = 1 - store file
-     * packet[0] = 2 - retrieve file
-     
-     * packet[0] != {1,2} - error, undefined request
-     **/
-    
-    send_it[0] = callback ? 1 : 2;
-    
+
     /**
      * PACKET STATUS
      *
@@ -318,7 +315,17 @@ void ClientNode::listener(int argc, const char * argv[]) {
     send(sock, send_it, sizeof(send_it), 0);
     close(sock);
     
-    // TODO: gather or split the file here
+
+    if (send_it[0] == 1) {
+
+        transferFileToCloud(chunks);
+    }
+    else if (send_it[0] == 2) {
+
+        retriveFileFromCloud(chunks);
+    }
+
+    exit(0);
 }
 
 

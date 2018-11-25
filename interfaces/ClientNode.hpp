@@ -34,7 +34,7 @@ private:
     bool retriveChunkFromStorageNode(chunk chunk);
    
 protected:
-    bool transferFileToCloud(vector<chunk>& chunks);
+    bool transferFileToCloud(vector<chunk> chunks);
     bool retriveFileFromCloud(vector<chunk> chunks);
     
 public:

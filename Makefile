@@ -1,4 +1,4 @@
-FLAGS = -std=c++11 -Iinterfaces/ -Ivo
+FLAGS = -std=c++11 -Iinterfaces/ -Ivo -Itesting_interfaces/
 
 all: 
 	g++ $(FLAGS) testing/RoutingNodeTester.cpp services/RoutingNode.cpp services/Communication.cpp -o bin/router
