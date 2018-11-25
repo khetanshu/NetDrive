@@ -26,8 +26,8 @@ class ClientNode :public Communication {
 private:
     void registerStorageNodeSSH(string nodeSSH);
     void registerStorageNode(string hostname, string port);
-    void splitFile(string filename, vector<chunk>& chunks); // splits the file to given chunk sizes
-    bool mergeFile(string filename, vector<chunk>& chunks); // merge chunks of file into file with given filename
+    void splitFile(string filename, vector<chunk>* chunks); // splits the file to given chunk sizes
+    bool mergeFile(string filename, vector<chunk>* chunks); // merge chunks of file into file with given filename
     
     bool transferFileToCloud(vector<chunk>& chunks);
 
