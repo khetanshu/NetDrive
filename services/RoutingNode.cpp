@@ -20,13 +20,13 @@ RoutingNode::RoutingNode(){
 
 void RoutingNode::registerDevices(){
     cout<<"**** Device Registration ****"<<endl;
-    nodeCapacityIndex[0]= 1024;//in MB
+    nodeCapacityIndex[0]= 1024.0 *1024 * 1024;//in MB
     cout<<"Node["<<0<<"] default capacity:"<<nodeCapacityIndex[0]<<endl;
     
-    nodeCapacityIndex[1]= 2048;//in MB
+    nodeCapacityIndex[1]= 2048.0 * 1024 * 1024;//in MB
     cout<<"Node["<<1<<"] default capacity:"<<nodeCapacityIndex[1]<<endl;
     
-    totalRemainingStorageCapacity += (1024 + 2048);
+    totalRemainingStorageCapacity += nodeCapacityIndex[0] + nodeCapacityIndex[1];
     
 //    int defaultCapacity=1; //TODO to be made more generic
 //    for (int i=0; i<totalStorageNodes; i++) {
@@ -218,8 +218,8 @@ void RoutingNode::listener(int argc, const char * argv[]) {
             // 3.1 lots of hacking, we know what the int size will be
             // so don't bother looking at buffer[2]
 
-            int file_size = 0;
-            memcpy(&file_size, &buffer[3], sizeof(int));
+            long file_size = 0;
+            memcpy(&file_size, &buffer[3], sizeof(long));
 
             // dbg
             cout << "[INFO]: file size from client = " << file_size << endl;
@@ -259,9 +259,10 @@ void RoutingNode::listener(int argc, const char * argv[]) {
              **/
 
             // retry if file doesn't exist
-            cout << "[INFO]: file not found on search" << endl;
+            
             if (! file_exists) continue;
 
+            cout << "[INFO]: file not found on search" << endl;
             chunks = fileIndex[file];
             send_it[3] = (char) chunks.size();
         }
