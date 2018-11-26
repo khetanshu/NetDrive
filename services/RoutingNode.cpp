@@ -260,9 +260,11 @@ void RoutingNode::listener(int argc, const char * argv[]) {
 
             // retry if file doesn't exist
             
-            if (! file_exists) continue;
-
-            cout << "[INFO]: file not found on search" << endl;
+            if (! file_exists) {
+                cout << "[INFO]: file not found on search" << endl;
+                continue;
+            }
+            
             chunks = fileIndex[file];
             send_it[3] = (char) chunks.size();
         }
